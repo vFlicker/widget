@@ -1,0 +1,316 @@
+{
+  "status": "success",
+  "calculation_id": 873986,
+  "offers": {
+    "errors": [
+      {
+        "id": 9096387,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "90",
+        "partnerMessage": "Общество с ограниченной ответственностью Абсолют Страхование исчерпало количество номеров для заключения договоров обязательного страхования гражданской ответственности владельцев транспортных средств в виде электронных документов, выделенное ему в соответствии с правилами профессиональной деятельности, установленными подпунктом «т» пункта 1 статьи 26 Федерального закона от 25 апреля 2002 года № 40-ФЗ «Об обязательном страховании гражданской ответственности владельцев транспортных средств». Для заключения договора страхования гражданской ответственности владельцев транспортных средств Вы можете перейти в Систему гарантирования заключения электронного договора ОСАГО с использованием интернет сайта РСА или обратиться в любое обособленное подразделение (филиал) Общество с ограниченной ответственностью Абсолют Страхование. В случае Вашего согласия на переход данные об условиях договора, указанных в заявлении за исключением персональных, будут сохранены и переданы в РСА.",
+        "paymentUrl": null,
+        "partner": {
+          "code": 19,
+          "name": "Абсолют Страхование",
+          "logoUrl": "https://polis.sale/assets/img/partners/absolute.png",
+          "bank_id": 1,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096377,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "По предложению возникла ошибка.\"",
+        "paymentUrl": null,
+        "partner": {
+          "code": 2,
+          "name": "АльфаСтрахование",
+          "logoUrl": "https://polis.sale/assets/img/partners/Logo_alfastrah.png",
+          "bank_id": 2,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096381,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "АнтисегментНе пройдена проверка; ",
+        "paymentUrl": null,
+        "partner": {
+          "code": 13,
+          "name": "Астро-Волга",
+          "logoUrl": "https://polis.sale/assets/img/partners/astro-volga-onlayn-osago-kak-oformit-i-rasschitat-stoimost-1.png",
+          "bank_id": 3,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096380,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "Errors:\nSomething goes wrong\nWarnings:\n",
+        "paymentUrl": null,
+        "partner": {
+          "code": 12,
+          "name": "ВСК",
+          "logoUrl": "https://polis.sale/assets/img/partners/logoVSK.png",
+          "bank_id": 5,
+          "prolong_able": 0
+        }
+      },
+      {
+        "status": 40,
+        "partnerMessage": "Отказано партнером",
+        "partner": {
+          "logoUrl": "https://polis.sale/assets/img/partners/Kombinirovannyy_logotip.png",
+          "name": "Верна",
+          "id": 0,
+          "bank_id": 4,
+          "prolong_able": 0
+        },
+        "message": "Отказано партнером"
+      },
+      {
+        "status": 40,
+        "partnerMessage": "Отказано партнером",
+        "partner": {
+          "logoUrl": "https://polis.sale/assets/img/partners/guide-strahovanie-pu.png",
+          "name": "Гайде",
+          "id": 0,
+          "bank_id": 6,
+          "prolong_able": 0
+        },
+        "message": "Отказано партнером"
+      },
+      {
+        "status": 40,
+        "partnerMessage": "Отказано партнером",
+        "partner": {
+          "logoUrl": "https://polis.sale/assets/img/partners/euroins.png",
+          "name": "ЕВРОИНС",
+          "id": 0,
+          "bank_id": 21,
+          "prolong_able": 0
+        },
+        "message": "Отказано партнером"
+      },
+      {
+        "id": 9096379,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "44",
+        "partnerMessage": "Возраст допущенных к управлению 30+",
+        "paymentUrl": null,
+        "partner": {
+          "code": 10,
+          "name": "Зетта",
+          "logoUrl": "https://polis.sale/assets/img/partners/logo-zetta.png",
+          "bank_id": 7,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096382,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "43",
+        "partnerMessage": "Партнер не работает в указанном регионе c заданной категорией ТС",
+        "paymentUrl": null,
+        "partner": {
+          "code": 1,
+          "name": "Ингосстрах",
+          "logoUrl": "https://polis.sale/assets/img/partners/logo-ingostrah.jpg",
+          "bank_id": 8,
+          "prolong_able": 0
+        }
+      },
+      {
+        "status": 40,
+        "partnerMessage": "Отказано партнером",
+        "partner": {
+          "logoUrl": "https://polis.sale/assets/img/partners/maks.png",
+          "name": "МАКС",
+          "id": 0,
+          "bank_id": 22,
+          "prolong_able": 0
+        },
+        "message": "Отказано партнером"
+      },
+      {
+        "id": 9096389,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "Internal Server Error(601d80ba-0482-48a8-9361-ce95123a91e0)-3010 ",
+        "paymentUrl": null,
+        "partner": {
+          "code": 20,
+          "name": "Маффин",
+          "logoUrl": "https://polis.sale/assets/img/partners/logo-mafin.png",
+          "bank_id": 9,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096384,
+        "offerAmount": 13214.88,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "Расчет не прошел сегментацию в СК по КБМ. / ОШИБКА: Проверка: сегмент 1; (U#20210118172755)okayСтатус: null",
+        "paymentUrl": null,
+        "partner": {
+          "code": 15,
+          "name": "ОСК",
+          "logoUrl": "https://polis.sale/assets/img/partners/Ob_edinenna_SK.gif",
+          "bank_id": 10,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096383,
+        "offerAmount": 12252.49,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "Выбрана другая СК",
+        "paymentUrl": null,
+        "partner": {
+          "code": 7,
+          "name": "Ренессанс",
+          "logoUrl": "https://polis.sale/assets/img/partners/renaissance.png",
+          "bank_id": 11,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096378,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "90",
+        "partnerMessage": "Не удалось сформировать запрос расчета к СК. - Response was of unexpected text/html ContentType. Incoming portion of HTML stream: <!DOCTYPE html PUBLIC -//W3C//DTD XHTML 1.0 Strict//EN http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd>\r\n<html xmlns=http://www.w3.org/1999/xhtml>\r\n<head>\r\n<meta http-equiv=Content-Type content=text/html; charset=iso-8859-1/>\r\n<title>500 - Internal server error.</title>\r\n<style type=text/css>\r\n<!--\r\nbody{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\nfieldset{padding:0 15px 10px 15px;}\r\nh1{font-size:2.4em;margin:0;color:#FFF;}\r\nh2{font-size:1.7em;margin:0;color:#CC0000;}\r\nh3{font-size:1.2em;margin:10px 0 0 0;color:#000000;}\r\n#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:trebuchet MS, Verdana, sans-serif;color:#FFF;\r\nbackground-color:#555555;}\r\n#content{margin:0 0 0 2%;position:relative;}\r\n.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n-->\r\n</style>\r\n</head>\r\n<body>\r\n<div id=header><h1>Server Error</h1></div>\r\n<div id=content>\r\n<div class=content-container><fieldset>\r\n<h2>500 - Internal server error.</h2>\r\n<h3>There is a problem with the resource you are looking for, and it cannot be displayed.</h3>\r\n</fieldset></div>\r\n</div>\r\n</body>\r\n</html>\r\n",
+        "paymentUrl": null,
+        "partner": {
+          "code": 4,
+          "name": "Росгосстрах",
+          "logoUrl": "https://polis.sale/assets/img/partners/logo_1200_1.png",
+          "bank_id": 13,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096388,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "90",
+        "partnerMessage": null,
+        "paymentUrl": null,
+        "partner": {
+          "code": 21,
+          "name": "Согаз",
+          "logoUrl": "https://polis.sale/assets/img/partners/sogaz.png",
+          "bank_id": 19,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096385,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": null,
+        "paymentUrl": null,
+        "partner": {
+          "code": 5,
+          "name": "Согласие",
+          "logoUrl": "https://polis.sale/assets/img/partners/soglasie.png",
+          "bank_id": 14,
+          "prolong_able": 0
+        }
+      },
+      {
+        "id": 9096386,
+        "offerAmount": null,
+        "offerCurrencyCode": "643",
+        "comissionAmount": null,
+        "comissionCurrencyCode": "null",
+        "status": "40",
+        "partnerMessage": "isTerminalG = true",
+        "paymentUrl": null,
+        "partner": {
+          "code": 3,
+          "name": "Тинькофф",
+          "logoUrl": "https://polis.sale/assets/img/partners/tinkoff.png",
+          "bank_id": 15,
+          "prolong_able": 0
+        }
+      }
+    ],
+    "success": [
+      {
+        "id": 3166,
+        "calculation_id": "12812355000",
+        "offerId": 3166,
+        "status": 200,
+        "tax": "2 900,18",
+        "offerAmount": 10741.4,
+        "osagoPeriod": "22.01.2021-21.01.2022",
+        "startDate": "2021-01-21T21:00:00.000000Z",
+        "minDate": "2021-01-19",
+        "comissionAmount": 3329.83,
+        "partner": {
+          "logoUrl": "https://polis.sale/assets/img/partners/eg.png",
+          "name": "Энергогарант",
+          "code": "eg",
+          "bank_id": 17,
+          "id": 5,
+          "confirmUrl": "http://propolis.group/api/osago/includes/5/payment_link/3166",
+          "prolong_able": 0
+        },
+        "coefficients": {
+          "Kpr": "2.69",
+          "Tb": "3739 ",
+          "Kt": "1.90",
+          "Kbm": "0.90",
+          "Kvs": "1.05",
+          "Ko": "1.00",
+          "Km": "1.6",
+          "Kp": "1.00",
+          "Ks": "1.00"
+        },
+        "client_request": 2889,
+        "percent": 27
+      }
+    ],
+    "offer_id": 2889
+  },
+  "message": "Заявка успешно сформирована",
+  "clientRequestId": 2889
+}

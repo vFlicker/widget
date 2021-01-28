@@ -1,0 +1,82 @@
+{
+  "9": {
+    "value": "Naveco",
+    "label": "Naveco",
+    "data": 1000182
+  },
+  "33": {
+    "value": "Volkswagen",
+    "label": "Volkswagen",
+    "data": 1000011
+  },
+  "36": {
+    "value": "Chevrolet",
+    "label": "Chevrolet",
+    "data": 1000014
+  },
+  "41": {
+    "value": "Vortex",
+    "label": "Vortex",
+    "data": 1000042
+  },
+  "50": {
+    "value": "Volvo",
+    "label": "Volvo",
+    "data": 1000027
+  },
+  "54": {
+    "value": "Land Rover",
+    "label": "Land Rover",
+    "data": 1000030
+  },
+  "58": {
+    "value": "Doninvest",
+    "label": "Doninvest",
+    "data": 1000046
+  },
+  "59": {
+    "value": "LDV",
+    "label": "LDV",
+    "data": 1000175
+  },
+  "108": {
+    "value": "Byvin",
+    "label": "Byvin",
+    "data": 1000154
+  },
+  "123": {
+    "value": "Haval",
+    "label": "Haval",
+    "data": 1000047
+  },
+  "147": {
+    "value": "Vauxhall",
+    "label": "Vauxhall",
+    "data": 1000101
+  },
+  "151": {
+    "value": "Rover",
+    "label": "Rover",
+    "data": 1000056
+  },
+  "156": {
+    "value": "Ravon",
+    "label": "Ravon",
+    "data": 1000055
+  },
+  "169": {
+    "value": "TVR",
+    "label": "TVR",
+    "data": 1000135
+  },
+  "172": {
+    "value": "Iveco",
+    "label": "Iveco",
+    "data": 1000126
+  },
+  "180": {
+    "value": "Invicta",
+    "label": "Invicta",
+    "data": 1000117
+  }
+}
