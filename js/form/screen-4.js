@@ -167,7 +167,7 @@ const onFormFourthScreenButtonNextClick = (evt) => {
   }
 
   if (!errors) {
-    alert('Расчет...');
+    calculate();
   } else {
     const screenActive = formFourthScreen.querySelector('.psw-form-screen-driver--active');
     const buttonActive = driverButtonsWrap.querySelector('.psw-drivers-button--active');
