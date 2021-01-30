@@ -76,8 +76,6 @@ const onFormFirstScreenButtonNextClick = (evt) => {
   if (!errors) {
     getScreen(2);
   }
-
-  getScreen(4);
 };
 
 // -------------------------- AJAX  --------------------------
