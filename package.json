@@ -1,0 +1,23 @@
+{
+  "name": "psw",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack --mode development",
+    "eslint": "eslint --fix src/**/*.js",
+    "test": "npm run eslint",
+    "start": "webpack serve --open --mode development"
+  },
+  "devDependencies": {
+    "dayjs": "1.10.3",
+    "eslint": "7.17.0",
+    "eslint-config-htmlacademy": "0.6.0",
+    "webpack": "5.11.1",
+    "webpack-cli": "4.3.1",
+    "webpack-dev-server": "3.11.1"
+  },
+  "engines": {
+    "node": "12"
+  }
+}
