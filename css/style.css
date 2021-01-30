@@ -176,6 +176,7 @@ input.psw-form-input-error:focus {
   max-width: 768px;
   min-height: 100%;
   margin: 0 auto;
+  padding: 40px 0;
   background-color: #f9f9f9;
   color: #444;
   overflow-x: hidden;
@@ -453,8 +454,13 @@ input.psw-form-input-error:focus {
 }
 
 .psw-response {
+  display: none;
   width: 100%;
   padding: 20px;
+}
+
+.psw-response--active {
+  display: block;
 }
 
 .psw-response__list {

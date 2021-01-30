@@ -1,5 +1,7 @@
+const responseWrapper =  document.querySelector('.psw-response');
+
 const outputCalculateResponseHtml = (data) => {
-  const responseList = document.querySelector('.psw-response__list');
+  const responseList = responseWrapper.querySelector('.psw-response__list');
 
   if (data.offers.success) {
     const html = data.offers.success
@@ -49,5 +51,6 @@ const getCalculateResponse = async () => {
 
 const calculate = () => {
   form.classList.remove('psw-form--active');
+  responseWrapper.classList.add('psw-response--active');
   getCalculateResponse();
 };
