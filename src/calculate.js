@@ -1,6 +1,6 @@
 const getCalculateScreen = () => {
 
-  const responseWrapper =  document.querySelector('.psw-response');
+  const responseWrapper = document.querySelector('.psw-response');
 
   const outputCalculateResponseHtml = (data) => {
     const responseList = responseWrapper.querySelector('.psw-response__list');
