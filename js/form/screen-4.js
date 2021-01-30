@@ -15,7 +15,7 @@ for (const inputWrapper of inputWrappers) {
   for (const input of inputs) {
     input.classList.add('not-required');
   }
-  
+
 }
 
 if (driverScreens.length > 0) {

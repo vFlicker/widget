@@ -461,6 +461,9 @@ input.psw-form-input-error:focus {
   margin: 0;
   padding: 0;
   list-style: none;
+
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .psw-response__item {

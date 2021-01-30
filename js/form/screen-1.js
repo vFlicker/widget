@@ -15,9 +15,6 @@ const inputAutoDocumentType = formFirstScreen.querySelector('#autoDocumentType')
 const checkboxNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCard');
 const inputsWrapNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCardInputsWrap');
 const formFirstScreenButtonNext = formFirstScreen.querySelector('.psw-btn-next-step');
-
-const optionMotorcyclesVehicleType = formFirstScreen.querySelector("option[value='640210140']");
-const optionTrucksVehicleType = formFirstScreen.querySelector("option[value='640183000']");
 checkboxNoDiagnosticCard.disabled = true;
 
 const onInputVehicleBrandChange = (evt) => {
@@ -74,11 +71,11 @@ const onCheckboxNoDiagnosticCardСhange = (evt) => {
 const onFormFirstScreenButtonNextClick = (evt) => {
   evt.preventDefault();
 
-  // const errors = checkCmpletenessFields(formFirstScreen);
+  const errors = checkCmpletenessFields(formFirstScreen);
 
-  // if (!errors) {
-  //   getScreen(2);
-  // }
+  if (!errors) {
+    getScreen(2);
+  }
 
   getScreen(4);
 };

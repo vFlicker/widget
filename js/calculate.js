@@ -1,8 +1,5 @@
-// errors // logoUrl // name // offerAmount // кнопка оформить
-
 const outputCalculateResponseHtml = (data) => {
   const responseList = document.querySelector('.psw-response__list');
-  console.log(123);
 
   if (data.offers.success) {
     const html = data.offers.success
@@ -54,4 +51,3 @@ const calculate = () => {
   form.classList.remove('psw-form--active');
   getCalculateResponse();
 };
-
