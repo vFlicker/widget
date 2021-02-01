@@ -457,6 +457,7 @@ input.psw-form-input-error:focus {
 
 .psw-response--active {
   display: block;
+  min-height: 500px;
 }
 
 .psw-response__list {
