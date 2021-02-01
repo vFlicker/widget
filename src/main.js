@@ -8,7 +8,7 @@ import {getFourthScreenForm} from './form/screen-4';
 import {ps__hide_alert, pswStorage, preloaderOn, preloaderOff} from "./utils";
 
 const prepare = () => {
-  window.pswUrl = "http://is.test/widget/osago";
+  window.pswUrl = "https://polis.sale/widget/osago";
   window.pswToken = 'PApfX9TcVFNittcsvhY4ZL0AsOrMWMrjdQsaeZJ1zo3nmP61TVvTwKFuIuYy';
   $.ajaxSetup({
     headers: {
