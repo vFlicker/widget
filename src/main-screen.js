@@ -1,4 +1,5 @@
-import {getScreen} from './utils';
+import * as $ from 'jquery';
+import {fillBySuggest, getScreen, preloaderOn, preloaderOff, ps__show_alert, ps__hide_alert} from './utils';
 
 export const getMainScreen = () => {
   const mainScreen = document.querySelector(`.psw-main-screen`);
@@ -10,14 +11,7 @@ export const getMainScreen = () => {
   mainScreen.classList.add(`psw-main-screen--active`);
 
   const onSearchButtonClick = (evt) => {
-    evt.preventDefault();
-
-    if (!input.value) {
-      input.classList.add(`psw-input-error`);
-    } else {
-      input.classList.remove(`psw-input-error`);
-      alert(`Заполнить поля..`);
-    }
+    fillBySuggest();
   };
 
   const onButtonLinkClick = (evt) => {
@@ -26,9 +20,17 @@ export const getMainScreen = () => {
     mainScreen.classList.remove(`psw-main-screen--active`);
     form.classList.add(`psw-form--active`);
 
-    getScreen(3);
+    getScreen(1);
   };
+
+  const setStartDate = () => {
+    let date = new Date();
+    date = date.setDate(date.getDate() + 4);
+    date = new Date(date);
+    document.querySelector('#osagoStartDate').value = (date.getDate() > 9 ? '' : '0') + date.getDate() + '.' + ((date.getMonth() + 1) > 9 ? '' : '0') + (date.getMonth() + 1) + '.' + date.getFullYear();
+  }
 
   searchButton.addEventListener(`click`, onSearchButtonClick);
   buttonLink.addEventListener(`click`, onButtonLinkClick);
+  setStartDate();
 };

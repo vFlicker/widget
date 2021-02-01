@@ -1,14 +1,31 @@
-import {index} from './index';
+import * as $ from 'jquery';
+import {index, pswLSbuilder} from './index';
 import {getMainScreen} from './main-screen';
 import {getFirstScreenForm} from './form/screen-1';
 import {getSecondScreenForm} from './form/screen-2';
 import {getThirdScreenForm} from './form/screen-3';
 import {getFourthScreenForm} from './form/screen-4';
+import {ps__hide_alert, pswStorage, preloaderOn, preloaderOff} from "./utils";
+
+const prepare = () => {
+  window.pswUrl = "http://is.test/widget/osago";
+  window.pswToken = 'PApfX9TcVFNittcsvhY4ZL0AsOrMWMrjdQsaeZJ1zo3nmP61TVvTwKFuIuYy';
+  $.ajaxSetup({
+    headers: {
+      Enc: window.pswToken
+    },
+    async: false
+  });
+}
 
 const pswInit = (selector) => {
   const widget = document.querySelector(selector);
 
   const start = () => {
+    pswStorage.remove('client');
+    pswStorage.remove('insurer');
+    pswStorage.remove('calculation');
+    pswLSbuilder();
     index();
     getMainScreen();
     getFirstScreenForm();
@@ -24,7 +41,7 @@ const pswInit = (selector) => {
           Номер автомобиля для рассчета стоимости ОСАГО
         </p>
         <div class="psw-main-screen-inner">
-          <input class="psw-main-screen__input psw-input" type="text">
+          <input class="psw-main-screen__input psw-input" type="text" id="ps__widget_entrance_value">
           <button class="psw-main-screen__psw-btn psw-btn">
             Найти
           </button>
@@ -36,7 +53,7 @@ const pswInit = (selector) => {
         </button>
       </div>
     </div>
-    <form class="psw-form">
+    <form class="psw-form" id="ps__widget_osago_form">
       <div class="psw-form-screen">
 
         <div class="psw-form-header">
@@ -50,8 +67,8 @@ const pswInit = (selector) => {
 
             <div class="psw-form-item">
               <input
-                type="date"
-                class="psw-form-input"
+                type="text"
+                class="psw-form-input psw-date-input"
                 name="osagoStartDate"
                 id="osagoStartDate"
                 placeholder=" ">
@@ -64,35 +81,6 @@ const pswInit = (selector) => {
                   Легковые автомобили
                 </option>
               </select>
-            </div>
-
-            <div class="psw-form-item psw-form-item--column">
-              <input type="hidden" id="brandId" value>
-              <input
-                type="text"
-                class="psw-form-input"
-                name="vehicleBrand"
-                id="vehicleBrand"
-                placeholder=" "
-                autocomplete="off">
-              <label for="vehicleBrand">Марка:</label>
-
-              <ul class="psw-drop-list" id="vehicleBrandList"></ul>
-            </div>
-
-            <div class="psw-form-item psw-form-item--column">
-              <input type="hidden" id="modelId" value>
-              <input
-                type="text"
-                class="psw-form-input"
-                name="vehicleModel"
-                id="vehicleModel"
-                placeholder=" "
-                autocomplete="off"
-                disabled>
-              <label for="vehicleModel">Модель:</label>
-
-              <ul class="psw-drop-list" id="vehicleModelList"></ul>
             </div>
 
             <div class="psw-form-item">
@@ -115,6 +103,31 @@ const pswInit = (selector) => {
               <label for="identifierNumber">VIN:</label>
             </div>
 
+            <div class="psw-form-item psw-form-item--column">
+              <input type="hidden" id="vehicleBrandName" value>
+              <input
+                type="text"
+                class="psw-form-input"
+                name="vehicleBrand"
+                id="vehicleBrand"
+                placeholder=" "
+                autocomplete="off">
+              <label for="vehicleBrand">Марка:</label>
+            </div>
+
+            <div class="psw-form-item psw-form-item--column">
+              <input type="hidden" id="vehicleModelName" value>
+              <input
+                type="text"
+                class="psw-form-input"
+                name="vehicleModel"
+                id="vehicleModel"
+                placeholder=" "
+                autocomplete="off"
+                disabled>
+              <label for="vehicleModel">Модель:</label>
+            </div>
+
             <div class="psw-form-item">
               <div class="psw-form-item psw-form-item--colums">
 
@@ -127,8 +140,6 @@ const pswInit = (selector) => {
                     autocomplete="off"
                     placeholder=" ">
                   <label for="vehicleYear">Год выпуска:</label>
-
-                  <ul class="psw-drop-list" id="vehicleYearList"></ul>
                 </div>
 
                 <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-2">
@@ -140,6 +151,13 @@ const pswInit = (selector) => {
                     placeholder=" ">
                   <label for="vehiclePower">Мощность л.с:</label>
                 </div>
+
+                <input type="hidden" name="vehicle_serie" id="vehicle_serie" value="">
+                <input type="hidden" name="vehicle_modification" id="vehicle_modification" value="">
+                <input type="hidden" name="vehicle_generation" id="vehicle_generation" value="">
+                <input type="hidden" name="vehicle_serie_name" id="vehicle_serie_name" value="">
+                <input type="hidden" name="vehicle_modification_name" id="vehicle_modification_name" value="">
+                <input type="hidden" name="vehicle_generation_name" id="vehicle_generation_name" value="">
 
               </div>
             </div>
@@ -168,10 +186,10 @@ const pswInit = (selector) => {
                   <input
                     type="text"
                     class="psw-form-input"
-                    name="autoDocumentSeries"
-                    id="autoDocumentSeries"
+                    name="autoDocumentSerie"
+                    id="autoDocumentSerie"
                     placeholder=" ">
-                  <label for="autoDocumentSeries">Серия:</label>
+                  <label for="autoDocumentSerie">Серия:</label>
                 </div>
 
                 <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -235,7 +253,7 @@ const pswInit = (selector) => {
                 <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-2">
                   <input
                     type="text"
-                    class="psw-form-input"
+                    class="psw-form-input psw-date-input"
                     name="autoDiagnosticCardDate"
                     id="autoDiagnosticCardDate"
                     placeholder=" ">
@@ -329,7 +347,7 @@ const pswInit = (selector) => {
 
             <h3 class="psw-h3">Адрес регистрации</h3>
 
-            <div class="psw-form-item">
+            <div class="psw-form-item psw-block-item">
               <input
                 type="text"
                 class="psw-form-input"
@@ -413,6 +431,7 @@ const pswInit = (selector) => {
                     class="psw-form-input psw-organisation-code-input"
                     name="insurerPassportOrganisationCode"
                     id="insurerPassportOrganisationCode"
+                    data-target="insurerIssuedPassport"
                     placeholder=" ">
                   <label for="insurerPassportOrganisationCode">
                     Подразделение:
@@ -534,7 +553,7 @@ const pswInit = (selector) => {
 
             <h3 class="psw-h3">Адрес регистрации</h3>
 
-            <div class="psw-form-item">
+            <div class="psw-form-item psw-block-item">
               <input
                 type="text"
                 class="psw-form-input"
@@ -617,6 +636,7 @@ const pswInit = (selector) => {
                     class="psw-form-input psw-organisation-code-input"
                     name="clientPassportOrganisationCode"
                     id="clientPassportOrganisationCode"
+                    data-target="clientIssuedPassport"
                     placeholder=" ">
                   <label for="clientPassportOrganisationCode">
                     Подразделение:
@@ -1669,10 +1689,30 @@ const pswInit = (selector) => {
       <ul class="psw-response__list">
       </ul>
     </div>
-  </div>`;
+    <div class="ps__widget_loading" id="ps__widget_loading">
+      <div class="ps__widget_loading-text">
+          <span class="ps__widget_loading-text-words">З</span>
+          <span class="ps__widget_loading-text-words">А</span>
+          <span class="ps__widget_loading-text-words">Г</span>
+          <span class="ps__widget_loading-text-words">Р</span>
+          <span class="ps__widget_loading-text-words">У</span>
+          <span class="ps__widget_loading-text-words">З</span>
+          <span class="ps__widget_loading-text-words">К</span>
+          <span class="ps__widget_loading-text-words">А</span>
+      </div>
+    </div>
+    <div class="ps__widget_alert_block">
+      <button class="ps__widget_alert_close_btn" onclick="ps__hide_alert()">+</button>
+      <div class="ps__widget_alert_title">Предупреждение</div>
+    <div class="ps__widget_alert_content"></div>
+  </div>
+</div>`;
 
   widget.innerHTML = html;
+  preloaderOn();
+  prepare();
   start();
+  preloaderOff();
 };
 
 pswInit(`#widget`);

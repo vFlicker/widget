@@ -1,4 +1,14 @@
-import { checkCmpletenessFields, getScreen } from "../utils";
+import {
+  checkCmpletenessFields,
+  getScreen,
+  formToJson,
+  pswStorage,
+  preloaderOn,
+  preloaderOff,
+  ps__show_alert,
+  ps__hide_alert
+} from "../utils";
+import * as $ from 'jquery';
 
 export const getFourthScreenForm = () => {
   const form = document.querySelector('.psw-form');
@@ -16,14 +26,15 @@ export const getFourthScreenForm = () => {
   const formFourthScreenButtonPrev = formFourthScreen.querySelector('.psw-btn-prev-step');
   const formFourthScreenButtonNext = formFourthScreen.querySelector('.psw-btn-next-step');
   const inputWrappers = formFourthScreen.querySelectorAll('.has-previous-license-items');
-  
+
   /* -----------------------------
               Расчёт
    ----------------------------- */
 
   const responseWrapper =  document.querySelector('.psw-response');
 
-  const outputCalculateResponseHtml = (data) => {
+  const outputCalculateResponseHtml = () => {
+    let data = pswStorage.get('calculation', true);
     const responseList = responseWrapper.querySelector('.psw-response__list');
 
     if (data.offers.success) {
@@ -65,11 +76,39 @@ export const getFourthScreenForm = () => {
     }
   }
 
-  const getCalculateResponse = async () => {
-    const res = await fetch('./data/response.json');
-    const data = await res.json();
+  const getCalculateResponse = () => {
+    preloaderOn();
+    let data = formToJson();
+    console.log(data);
+    $.ajax({
+      url: window.pswUrl + '/calculate',
+      type: 'POST',
+      headers: {
+        Enc: window.pswToken
+      },
+      data: data,
+      success: (response) => {
+        if (response.status && response.status === 'error' && response.errors) {
+          let wrong = '<ul>';
+          for (let err in response.errors) {
+            if (response.errors.hasOwnProperty(err)) {
+              response.errors[err].map(message => {
+                wrong += `<li>${message}</li>`;
+              });
+            }
+          }
 
-    outputCalculateResponseHtml(data);
+          ps__show_alert(wrong);
+        } else {
+          pswStorage.set('calculation', response, true);
+          outputCalculateResponseHtml();
+        }
+        preloaderOff();
+      },
+      fail: (error) => {
+        console.log(error);
+      }
+    });
   };
 
   const calculate = () => {

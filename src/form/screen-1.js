@@ -1,251 +1,230 @@
 import { checkCmpletenessFields, getScreen } from "../utils";
+import * as $ from 'jquery';
+import 'jquery-ui-bundle';
+
+let pswVehicleModels = [];
+let pswVehicleYears = [];
 
 export const getFirstScreenForm = () => {
-  const form = document.querySelector('.psw-form');
-  const formFirstScreen = form.querySelectorAll('.psw-form-screen')[0];
+  $(() => {
+    let autoDocumentType = document.getElementById('autoDocumentType');
+    let vehicleLicensePlate = document.getElementById('vehicleLicensePlate');
+    const form = document.querySelector('.psw-form');
+    const formFirstScreen = form.querySelectorAll('.psw-form-screen')[0];
+    const formFirstScreenButtonNext = formFirstScreen.querySelector('.psw-btn-next-step');
+    const checkboxNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCard');
+    const inputsWrapNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCardInputsWrap');
+    checkboxNoDiagnosticCard.disabled = true;
 
-  const inputVehicleBrand = formFirstScreen.querySelector('#vehicleBrand');
-  const brandId = formFirstScreen.querySelector('#brandId');
-  const brandList = formFirstScreen.querySelector('#vehicleBrandList');
+    $('#vehicleBrand').autocomplete({
+      source: function (request, response) {
+        $('#vehicleBrandName').val('');
+        $.ajax({
+          url: window.pswUrl + '/brands?query=' + request.term,
+          type: 'GET',
+          async: false,
+          success: function (data) {
+            response(data);
+          },
+          error: function (error) {
+            ps__show_alert('Технические неполадки. Просим прощения за неудобства.');
+            console.log(error);
+          }
+        })
+      },
+      select: function (event, ui) {
+        $('#vehicleBrandName').val(ui.item.data);
+        event.target.classList.remove('border-danger');
+        prepareModels(ui.item.data);
+      },
+      close: function (event, ui) {
+        if (!$('#vehicleBrandName').val()) {
+          // alertify.error('Марку авто нужно выбрать из списка!');
+          event.target.value = '';
+          event.target.classList.add('border-danger');
+          event.target.focus();
+        }
+      }
+    });
 
-  const inputVehicleModel = formFirstScreen.querySelector('#vehicleModel');
-  const modelId = formFirstScreen.querySelector('#modelId');
-  const modelList = formFirstScreen.querySelector('#vehicleModelList');
+    $('#vehicleYear').on('change', () => {
+      let year = $('#vehicleYear').val();
 
-  const inputVehicleYear = formFirstScreen.querySelector('#vehicleYear');
-  const yearList = formFirstScreen.querySelector('#vehicleYearList');
+      if (Number(year) > 2018 && Number(year) < 2022) {
+        checkboxNoDiagnosticCard.disabled = false;
+      } else {
+        checkboxNoDiagnosticCard.disabled = true;
+        checkboxNoDiagnosticCard.checked = false;
+        inputsWrapNoDiagnosticCard.classList.remove('psw-form-item--hidden');
+      }
+    });
 
-  const inputVehicleLicensePlate = formFirstScreen.querySelector('#vehicleLicensePlate');
-  const inputIdentifierNumber = formFirstScreen.querySelector('#identifierNumber');
-  const inputAutoDocumentType = formFirstScreen.querySelector('#autoDocumentType');
-  const checkboxNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCard');
-  const inputsWrapNoDiagnosticCard = formFirstScreen.querySelector('#noDiagnosticCardInputsWrap');
-  const formFirstScreenButtonNext = formFirstScreen.querySelector('.psw-btn-next-step');
-  checkboxNoDiagnosticCard.disabled = true;
+    vehicleLicensePlate.addEventListener('change', () => {
+      if (vehicleLicensePlate.value) {
 
-  const changeCheckboxNoDiagnosticCard = (year) => {
-    if (Number(year) > 2018 && Number(year) < 2022) {
-      checkboxNoDiagnosticCard.disabled = false;
-    } else {
-      checkboxNoDiagnosticCard.disabled = true;
-      checkboxNoDiagnosticCard.checked = false;
-      inputsWrapNoDiagnosticCard.classList.remove('psw-form-item--hidden');
-    }
+      } else {
+        autoDocumentType.value = 'pts';
+      }
+    });
+
+    autoDocumentType.addEventListener('change', () => {
+      if (autoDocumentType.value === 'epts') {
+        document.getElementById('autoDocumentSerie').setAttribute('disabled', 'disabled');
+      } else {
+        if (vehicleLicensePlate.value) {
+
+        } else {
+          autoDocumentType.value = 'pts';
+        }
+
+        document.getElementById('autoDocumentSerie').removeAttribute('disabled');
+      }
+    });
+
+    checkboxNoDiagnosticCard.addEventListener('change', (e) => {
+      const inputAutoDianosticCardNumber = inputsWrapNoDiagnosticCard.querySelector('#autoDianosticCardNumber');
+      const inputAutoDiagnosticCardDate = inputsWrapNoDiagnosticCard.querySelector('#autoDiagnosticCardDate');
+
+      if (e.target.checked) {
+        inputsWrapNoDiagnosticCard.classList.add('psw-form-item--hidden')
+        inputAutoDianosticCardNumber.classList.add('not-required');
+        inputAutoDiagnosticCardDate.classList.add('not-required');
+      } else {
+        inputsWrapNoDiagnosticCard.classList.remove('psw-form-item--hidden');
+        inputAutoDianosticCardNumber.classList.remove('not-required');
+        inputAutoDiagnosticCardDate.classList.remove('not-required');
+      }
+    });
+
+    const onFormFirstScreenButtonNextClick = (evt) => {
+      evt.preventDefault();
+
+      const errors = checkCmpletenessFields(formFirstScreen);
+
+      if (!errors) {
+        getScreen(2);
+      }
+    };
+
+    formFirstScreenButtonNext.addEventListener('click', onFormFirstScreenButtonNextClick);
+  });
+
+  const prepareModels = (brand) => {
+    $('#vehicleModelName').val('');
+    $.ajax({
+      url: window.pswUrl + '/models?query=' + brand,
+      type: 'GET',
+      async: false,
+      success: function (data) {
+        let models = [];
+        models = data.map(item => {
+          return {
+            value: (item.nameRu ? item.nameRu : item.name),
+            label: (item.nameRu ? item.nameRu : item.name),
+            data: item.id
+          }
+        });
+        $('#vehicleModel').autocomplete({
+          source: models,
+          select: function (event, ui) {
+            $('#vehicleModelName').val(ui.item.data);
+            event.target.classList.remove('border-danger');
+            prepareYears(ui.item.data);
+          },
+          close: function (event, ui) {
+            if (!$('#vehicleModelName').val()) {
+              // alertify.error('Модель авто нужно выбрать из списка!');
+              event.target.value = '';
+              event.target.classList.add('border-danger');
+              event.target.focus();
+            }
+          }
+        }).attr('disabled', false);
+      },
+      error: function (error) {
+        ps__show_alert('Технические неполадки. Просим прощения за неудобства.');
+        console.log(data);
+      }
+    })
   };
 
-  const onInputVehicleBrandChange = (evt) => {
-    if (evt.target.value && evt.target.value.length > 0) {
-      inputVehicleModel.disabled = false;
-    } else {
-      inputVehicleModel.disabled = true;
-    }
+  const prepareYears = (model) => {
+    unSetModifications();
+    $.ajax({
+      url: window.pswUrl + '/years?model_id=' + model,
+      type: 'GET',
+      async: false,
+      success: function (data) {
+        let years = data.map(item => {
+          return {
+            value: item,
+            label: item,
+          };
+        });
+        $('#vehicleYear').autocomplete({
+          source: years,
+          select: function (event, ui) {
+            setModifications({
+              model: model,
+              year: ui.item.value
+            }, event.target);
+          },
+          close: function (event, ui) {
+            if (!checkModificationsExist()) {
+              // alertify.error('Год выпуска нужно выбрать из списка!');
+              event.target.value = '';
+              event.target.classList.add('border-danger');
+              event.target.focus();
+            }
+          }
+        })
+      },
+      error: function (error) {
+        ps__show_alert('Технические неполадки. Просим прощения за неудобства.');
+        console.log(error);
+      }
+    })
   }
 
-  const onInputVehicleLicensePlateChange = (evt) => {
-    if (evt.target.value && evt.target.value.length > 0) {
-      inputAutoDocumentType.value = 'sts';
-      inputIdentifierNumber.classList.add('not-required');
-      inputIdentifierNumber.classList.remove('psw-form-input-error');
-    } else {
-      inputAutoDocumentType.value = 'pts';
-      inputIdentifierNumber.classList.remove('not-required');
-    }
-  };
+  const setModifications = (data, element) => {
+    $.ajax({
+      url: window.pswUrl + '/modifications?model_id=' + data.model + '&year=' + data.year,
+      type: 'GET',
+      async: false,
+      success: function (data) {
+        $('#vehicle_modification').val(data.modification);
+        $('#vehicle_modification_name').val(data.modification_name);
+        $('#vehicle_serie').val(data.serie);
+        $('#vehicle_serie_name').val(data.serie_name);
+        $('#vehicle_generation').val(data.generation);
+        $('#vehicle_generation_name').val(data.generation_name);
 
-  const onInputIdentifierNumberChange = (evt) => {
-    if (evt.target.value && evt.target.value.length > 0) {
-      inputVehicleLicensePlate.classList.add('not-required');
-      inputVehicleLicensePlate.classList.remove('psw-form-input-error');
-    } else {
-      inputVehicleLicensePlate.classList.remove('not-required');
-    }
-  };
-
-  const onInputAutoDocumentTypeChange = (evt) => {
-    const hasLicensePlate = inputVehicleLicensePlate.value && inputVehicleLicensePlate.value.length > 0;
-
-    if (evt.target.value === 'sts' && !hasLicensePlate) {
-      evt.target.value = 'pts';
-    }
-  };
-
-  const onCheckboxNoDiagnosticCardСhange = (evt) => {
-    const inputAutoDianosticCardNumber = inputsWrapNoDiagnosticCard.querySelector('#autoDianosticCardNumber');
-    const inputAutoDiagnosticCardDate = inputsWrapNoDiagnosticCard.querySelector('#autoDiagnosticCardDate');
-
-    if (evt.target.checked) {
-      inputsWrapNoDiagnosticCard.classList.add('psw-form-item--hidden')
-      inputAutoDianosticCardNumber.classList.add('not-required');
-      inputAutoDiagnosticCardDate.classList.add('not-required');
-    } else {
-      inputsWrapNoDiagnosticCard.classList.remove('psw-form-item--hidden');
-      inputAutoDianosticCardNumber.classList.remove('not-required');
-      inputAutoDiagnosticCardDate.classList.remove('not-required');
-    }
-  };
-
-  const onFormFirstScreenButtonNextClick = (evt) => {
-    evt.preventDefault();
-
-    const errors = checkCmpletenessFields(formFirstScreen);
-
-    if (!errors) {
-      getScreen(2);
-    }
-  };
-
-  // -------------------------- AJAX  --------------------------
-  const onOutsideDropItemlick = (evt) => {
-    const dropItem = document.querySelector('.psw-drop-item');
-
-    if (dropItem) {
-      if (evt.target !== dropItem) {
-        // Здесь пофиксить баг, нужно ображаться
-        // конерктно к конкретному инпуту, а то очищаются все.
-        // inputVehicleBrand.value = '';
-        // inputVehicleModel.value = '';
-        // inputVehicleYear.value = '';
-        brandList.innerHTML = '';
-        modelList.innerHTML = '';
-        yearList.innerHTML = '';
+        if (checkModificationsExist()) {
+          element.classList.remove('border-danger');
+        }
+      },
+      error: function (error) {
+        ps__show_alert('Технические неполадки. Просим прощения за неудобства.');
+        console.log(error);
       }
-    }
-  };
+    })
+  }
 
-  const onBrandListItemClick = (evt) => {
-    evt.preventDefault();
+  const unSetModifications = () => {
+    $('#vehicle_modification').val('')
+    $('#vehicle_modification_name').val('')
+    $('#vehicle_serie').val('')
+    $('#vehicle_serie_name').val('')
+    $('#vehicle_generation').val('')
+    $('#vehicle_generation_name').val('')
+  }
 
-    inputVehicleBrand.value = evt.target.textContent;
-    brandId.value = evt.target.dataset.value;
-    brandList.innerHTML = '';
-  };
-
-  const onModelListItemClick = (evt) => {
-    evt.preventDefault();
-
-    inputVehicleModel.value = evt.target.textContent;
-    modelId.value = evt.target.dataset.value;
-    modelList.innerHTML = '';
-  };
-
-  const onYearListItemClick = (evt) => {
-    inputVehicleYear.value = evt.target.textContent;
-    yearList.innerHTML = '';
-
-    changeCheckboxNoDiagnosticCard(evt.target.textContent);
-  };
-
-  const outputBrandListItemsHtml = (matches) => {
-    if (matches.length > 0) {
-      const html = matches
-        .map(match => `
-          <li class="psw-drop-item" data-value="${match.data}">${match.value}</li>
-        `)
-        .join('');
-
-      brandList.innerHTML = html;
-    };
-  };
-
-  const outputModelListItemsHtml = (matches) => {
-    if (matches.length > 0) {
-      const html = matches
-        .map(match => `
-          <li class="psw-drop-item" data-value="${match.id}">${match.nameRu
-            ? match.nameRu
-            : match.name}</li>
-        `)
-        .join('');
-
-      modelList.innerHTML = html;
-    };
-  };
-
-  const outputYearsListItemsHtml = (matches) => {
-    if (matches.length > 0) {
-      const html = matches
-        .map(match => `
-          <li class="psw-drop-item"">${match}</li>
-        `)
-        .join('');
-
-      yearList.innerHTML = html;
-    };
-  };
-
-  const searchBrandListItems = async (searchText) => {
-    const res = await fetch('./data/brands.json');
-    const data = await res.json();
-
-    // Get and filter through entered data
-    let matches = Object.values(data).filter(item => {
-      const regex = new RegExp(`^${searchText}`, 'gi');
-      return item.value.match(regex) || item.label.match(regex);
-    });
-
-    // Clears data if search input field is empty
-    if (searchText.length === 0) {
-      matches = [];
-      brandList.innerHTML = '';
-    }
-
-    outputBrandListItemsHtml(matches);
-  };
-
-  const searchModelListItems = async (searchText) => {
-    const res = await fetch('./data/models.json');
-    const data = await res.json();
-
-    // Get and filter through entered data
-    let matches = data.models.filter(item => {
-      const regex = new RegExp(`^${searchText}`, 'gi');
-      return item.name.match(regex) || item.nameRu.match(regex);
-    });
-
-    // Clears data if search input field is empty
-    if (searchText.length === 0) {
-      matches = [];
-      modelList.innerHTML = '';
-    }
-
-    outputModelListItemsHtml(matches);
-  };
-
-  const searchYearsListItems = async (searchText) => {
-    const res = await fetch('./data/years.json');
-    const data = await res.json();
-
-    // Get and filter through entered data
-    let matches = data.years.filter(item => {
-      const regex = new RegExp(`^${searchText}`, 'gi');
-      return item.toString().match(regex);
-    });
-
-    // Clears data if search input field is empty
-    if (searchText.length === 0) {
-      matches = [];
-      yearList.innerHTML = '';
-    }
-
-    outputYearsListItemsHtml(matches);
-  };
-
-  brandList.addEventListener('click', onBrandListItemClick);
-  modelList.addEventListener('click', onModelListItemClick);
-  yearList.addEventListener('click', onYearListItemClick);
-
-  inputVehicleBrand.addEventListener('input', (evt) => searchBrandListItems(evt.target.value));
-  inputVehicleModel.addEventListener('input', (evt) => searchModelListItems(evt.target.value));
-  inputVehicleYear.addEventListener('input', (evt) => searchYearsListItems(evt.target.value));
-
-  document.addEventListener('click', onOutsideDropItemlick);
-  // -------------------------- !AJAX  --------------------------
-
-  inputVehicleLicensePlate.addEventListener('change', onInputVehicleLicensePlateChange);
-  inputIdentifierNumber.addEventListener('change', onInputIdentifierNumberChange);
-  inputVehicleYear.addEventListener('input', (evt) => changeCheckboxNoDiagnosticCard(evt.target.value));
-  inputAutoDocumentType.addEventListener('change', onInputAutoDocumentTypeChange);
-  inputVehicleBrand.addEventListener('change', onInputVehicleBrandChange);
-  checkboxNoDiagnosticCard.addEventListener('change', onCheckboxNoDiagnosticCardСhange);
-  formFirstScreenButtonNext.addEventListener('click', onFormFirstScreenButtonNextClick);
-};
+  const checkModificationsExist = () => {
+    return $('#vehicle_modification').val()
+      || $('#vehicle_modification_name').val()
+      || $('#vehicle_serie').val()
+      || $('#vehicle_serie_name').val()
+      || $('#vehicle_generation').val()
+      || $('#vehicle_generation_name').val();
+  }
+}

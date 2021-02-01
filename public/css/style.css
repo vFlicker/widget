@@ -1,10 +1,4 @@
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
+.psw-wrapper * {
   font-family: -apple-system, Ubuntu, 'Open Sans', sans-serif;
 }
 
@@ -180,6 +174,7 @@ input.psw-form-input-error:focus {
   background-color: #f9f9f9;
   color: #444;
   overflow-x: hidden;
+  position: relative;
 }
 
 .psw-wrapper,
@@ -299,17 +294,18 @@ input.psw-form-input-error:focus {
 
 .psw-drop-list {
   max-height: 210px;
-
   margin: 0;
   padding: 0;
   list-style: none;
-
   border: 1px solid #e6eaea;
   border-top: none;
   border-radius: 0 0 4px 4px;
   background-color: #fff;
-
   overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 9999;
+  box-shadow: 1px 1px 4px 0px #cccc;
 }
 
 .psw-drop-list li {
@@ -518,6 +514,165 @@ input.psw-form-input-error:focus {
 .psw-response__btn {
   flex: 0 0 20%;
   min-height: 34px;
+}
+
+.suggestions_promo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.psw-block-item {
+  display: block;
+}
+
+.ps__widget_loading {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000026;
+  z-index: 9999;
+}
+
+.ps__widget_loading-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+}
+.ps__widget_loading-text span {
+  display: inline-block;
+  margin: 0 5px;
+  color: #fff;
+}
+.ps__widget_loading-text span:nth-child(1) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 0s infinite linear alternate;
+  animation: blur-text 1.5s 0s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(2) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 0.2s infinite linear alternate;
+  animation: blur-text 1.5s 0.2s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(3) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 0.4s infinite linear alternate;
+  animation: blur-text 1.5s 0.4s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(4) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 0.6s infinite linear alternate;
+  animation: blur-text 1.5s 0.6s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(5) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 0.8s infinite linear alternate;
+  animation: blur-text 1.5s 0.8s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(6) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 1s infinite linear alternate;
+  animation: blur-text 1.5s 1s infinite linear alternate;
+}
+.ps__widget_loading-text span:nth-child(7) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 1.2s infinite linear alternate;
+  animation: blur-text 1.5s 1.2s infinite linear alternate;
+}
+
+.ps__widget_loading-text span:nth-child(8) {
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-animation: blur-text 1.5s 1.4s infinite linear alternate;
+  animation: blur-text 1.5s 1.4s infinite linear alternate;
+}
+
+@-webkit-keyframes blur-text {
+  0% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
+  100% {
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes blur-text {
+  0% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
+  100% {
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+  }
+}
+
+.ui-helper-hidden-accessible {
+  display: none !important;
+  visibility: hidden;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.ps__widget_alert_block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #dcdcdc;
+  display: none;
+}
+
+.ps__widget_alert_title {
+  width: 100%;
+  padding: 15px;
+  color: #000000;
+  font-size: 17px;
+  border-bottom: 2px solid #ff0000;
+}
+
+.ps__widget_alert_content {
+  padding: 15px;
+  color: #000000;
+  font-size: 14px;
+}
+
+.ps__widget_alert_close_btn {
+  position: absolute;
+  right: 15px;
+  top: 4px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 40px;
+  color: #000000;
+  cursor: pointer;
+  transform: rotate(45deg);
 }
 
 @media (max-width: 767.98px) {

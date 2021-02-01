@@ -19,5 +19,10 @@
   },
   "engines": {
     "node": "12"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "jquery-ui-bundle": "^1.12.1-migrate",
+    "suggestions-jquery": "^20.3.0"
   }
 }

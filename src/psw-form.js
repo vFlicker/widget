@@ -152,10 +152,10 @@ const pswInit = (selector) => {
                   <input
                     type="text"
                     class="psw-form-input"
-                    name="autoDocumentSeries"
-                    id="autoDocumentSeries"
+                    name="autoDocumentSerie"
+                    id="autoDocumentSerie"
                     placeholder=" ">
-                  <label for="autoDocumentSeries">Серия:</label>
+                  <label for="autoDocumentSerie">Серия:</label>
                 </div>
 
                 <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -1813,10 +1813,10 @@ pswInit(widget);
 //                   <input
 //                     type="text"
 //                     class="psw-form-input"
-//                     name="autoDocumentSeries"
-//                     id="autoDocumentSeries"
+//                     name="autoDocumentSerie"
+//                     id="autoDocumentSerie"
 //                     placeholder=" ">
-//                   <label for="autoDocumentSeries">Серия:</label>
+//                   <label for="autoDocumentSerie">Серия:</label>
 //                 </div>
 
 //                 <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
