@@ -9,7 +9,7 @@ export const getSecondScreenForm = () => {
 
   const checkboxIsInsurerForeigner = formSecondScreen.querySelector(`#isInsurerForeigner`);
   const inputWrapInsurerIssuedPassport = formSecondScreen.querySelector(`#insurerIssuedPassportInputWrap`);
-  const inputInsurerIssuedPassport = inputWrapInsurerIssuedPassport.querySelector(`#insurerIssuedPassport`);
+  const inputInsurerIssuedPassport = inputWrapInsurerIssuedPassport.querySelector(`#insurerPassportOrganisation`);
   const checkboxIsInsurerClient = formSecondScreen.querySelector(`#isInsurerClient`);
   const formSecondScreenButtonPrev = formSecondScreen.querySelector(`.psw-btn-prev-step`);
   const formSecondScreenButtonNext = formSecondScreen.querySelector(`.psw-btn-next-step`);

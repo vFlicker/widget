@@ -59,12 +59,12 @@ export const ps__hide_alert = () => {
 
 export const preloaderOn = () => {
   console.log('Preloader start');
-  $('#ps__widget_loading').show();
+  $('#ps__widget_loading').css('display', 'block');
 }
 
 export const preloaderOff = () => {
   console.log('Preloader off');
-  $('#ps__widget_loading').delay(1000).hide();
+  $('#ps__widget_loading').delay(1000).css('display', 'none');
 }
 
 export const checkCmpletenessFields = (selector) => {
@@ -158,8 +158,8 @@ export const formToJson = () => {
         delete indexed_array['driver' + i + 'FirstLicenseIssue'];
         delete indexed_array['driver' + i + 'LicenseIssue'];
         delete indexed_array['driver' + i + 'Number'];
-        delete indexed_array['driver' + i + 'PreviousNumber'];
-        delete indexed_array['driver' + i + 'PreviousSerie'];
+        delete indexed_array['driver' + i + 'PreviousLicenseNumber'];
+        delete indexed_array['driver' + i + 'PreviousLicenseSerie'];
         delete indexed_array['driver' + i + 'PreviousDate'];
         delete indexed_array['driver' + i + 'Serie'];
       } else {

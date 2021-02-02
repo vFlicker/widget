@@ -8,7 +8,7 @@ export const getThirdScreenForm = () => {
 
   const checkboxIsClientForeigner = formThirdScreen.querySelector(`#isClientForeigner`);
   const inputWrapClientIssuedPassport = formThirdScreen.querySelector(`#clientIssuedPassportInputWrap`);
-  const inputClientIssuedPassport = inputWrapClientIssuedPassport.querySelector(`#clientIssuedPassport`);
+  const inputClientIssuedPassport = inputWrapClientIssuedPassport.querySelector(`#clientPassportOrganisation`);
   const formThirdScreenButtonPrev = formThirdScreen.querySelector(`.psw-btn-prev-step`);
   const formThirdScreenButtonNext = formThirdScreen.querySelector(`.psw-btn-next-step`);
 

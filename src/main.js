@@ -7,14 +7,18 @@ import {getThirdScreenForm} from './form/screen-3';
 import {getFourthScreenForm} from './form/screen-4';
 import {ps__hide_alert, pswStorage, preloaderOn, preloaderOff} from "./utils";
 
-const prepare = () => {
-  window.pswUrl = "https://polis.sale/widget/osago";
-  window.pswToken = 'PApfX9TcVFNittcsvhY4ZL0AsOrMWMrjdQsaeZJ1zo3nmP61TVvTwKFuIuYy';
-  $.ajaxSetup({
-    headers: {
-      Enc: window.pswToken
-    },
-    async: false
+const prepare = (token) => {
+  window.pswUrl = "http://is.test/widget/osago";
+  window.pswToken = token;
+  $(() => {
+    $.ajaxSetup({
+      headers: {
+        Enc: window.pswToken
+      }
+    });
+
+    $.ajaxStart(() => preloaderOn);
+    $.ajaxStop(() => preloaderOff);
   });
 }
 
@@ -76,6 +80,7 @@ const pswInit = (selector) => {
             </div>
 
             <div class="psw-form-item">
+            <input type="hidden" name="vehicleTypeName" value="Легковые автомобили">
               <select class="psw-form-select" name="vehicleType" id="vehicleType">
                 <option value="640189240" selected>
                   Легковые автомобили
@@ -104,7 +109,7 @@ const pswInit = (selector) => {
             </div>
 
             <div class="psw-form-item psw-form-item--column">
-              <input type="hidden" id="vehicleBrandName" value>
+              <input type="hidden" name="vehicleBrandName" id="vehicleBrandName" value>
               <input
                 type="text"
                 class="psw-form-input"
@@ -116,7 +121,7 @@ const pswInit = (selector) => {
             </div>
 
             <div class="psw-form-item psw-form-item--column">
-              <input type="hidden" id="vehicleModelName" value>
+              <input type="hidden" name="vehicleModelName" id="vehicleModelName" value>
               <input
                 type="text"
                 class="psw-form-input"
@@ -370,10 +375,10 @@ const pswInit = (selector) => {
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="insurerPassportSeries"
-                      id="insurerPassportSeries"
+                      name="insurerPassportSerie"
+                      id="insurerPassportSerie"
                       placeholder=" ">
-                    <label for="insurerPassportSeries">Серия:</label>
+                    <label for="insurerPassportSerie">Серия:</label>
                   </div>
                 </div>
 
@@ -404,10 +409,10 @@ const pswInit = (selector) => {
               <input
                 type="text"
                 class="psw-form-input"
-                name="insurerIssuedPassport"
-                id="insurerIssuedPassport"
+                name="insurerPassportOrganisation"
+                id="insurerPassportOrganisation"
                 placeholder=" ">
-              <label for="insurerIssuedPassport">Кем выдан:</label>
+              <label for="insurerPassportOrganisation">Кем выдан:</label>
             </div>
 
             <div class="psw-form-item">
@@ -431,7 +436,7 @@ const pswInit = (selector) => {
                     class="psw-form-input psw-organisation-code-input"
                     name="insurerPassportOrganisationCode"
                     id="insurerPassportOrganisationCode"
-                    data-target="insurerIssuedPassport"
+                    data-target="insurerPassportOrganisation"
                     placeholder=" ">
                   <label for="insurerPassportOrganisationCode">
                     Подразделение:
@@ -575,10 +580,10 @@ const pswInit = (selector) => {
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="clientPassportSeries"
-                      id="clientPassportSeries"
+                      name="clientPassportSerie"
+                      id="clientPassportSerie"
                       placeholder=" ">
-                    <label for="clientPassportSeries">Серия:</label>
+                    <label for="clientPassportSerie">Серия:</label>
                   </div>
                 </div>
 
@@ -609,10 +614,10 @@ const pswInit = (selector) => {
               <input
                 type="text"
                 class="psw-form-input"
-                name="clientIssuedPassport"
-                id="clientIssuedPassport"
+                name="clientPassportOrganisation"
+                id="clientPassportOrganisation"
                 placeholder=" ">
-              <label for="clientIssuedPassport">Кем выдан:</label>
+              <label for="clientPassportOrganisation">Кем выдан:</label>
             </div>
 
             <div class="psw-form-item">
@@ -636,7 +641,7 @@ const pswInit = (selector) => {
                     class="psw-form-input psw-organisation-code-input"
                     name="clientPassportOrganisationCode"
                     id="clientPassportOrganisationCode"
-                    data-target="clientIssuedPassport"
+                    data-target="clientPassportOrganisation"
                     placeholder=" ">
                   <label for="clientPassportOrganisationCode">
                     Подразделение:
@@ -739,11 +744,11 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-series"
-                        name="driver1Series"
-                        id="driver1Series"
+                        class="psw-form-input  psw-form-input--driver-serie"
+                        name="driver1Serie"
+                        id="driver1Serie"
                         placeholder=" ">
-                      <label for="driver1Series">Серия:</label>
+                      <label for="driver1Serie">Серия:</label>
                     </div>
                   </div>
 
@@ -820,24 +825,24 @@ const pswInit = (selector) => {
                    id="driver1HasPreviousLicenseItems">
                 <div class="psw-form-item psw-form-item--colums">
 
-                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--series">
+                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--Serie">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver1PreviousSeries"
-                      id="driver1PreviousSeries"
+                      name="driver1PreviousLicenseSerie"
+                      id="driver1PreviousLicenseSerie"
                       placeholder=" ">
-                    <label for="driver1PreviousSeries">Серия:</label>
+                    <label for="driver1PreviousLicenseSerie">Серия:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver1PreviousNumber"
-                      id="driver1PreviousNumber"
+                      name="driver1PreviousLicenseNumber"
+                      id="driver1PreviousLicenseNumber"
                       placeholder=" ">
-                    <label for="driver1PreviousNumber">Номер:</label>
+                    <label for="driver1PreviousLicenseNumber">Номер:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -938,11 +943,11 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-series"
-                        name="driver2Series"
-                        id="driver2Series"
+                        class="psw-form-input  psw-form-input--driver-Serie"
+                        name="driver2Serie"
+                        id="driver2Serie"
                         placeholder=" ">
-                      <label for="driver2Series">Серия:</label>
+                      <label for="driver2Serie">Серия:</label>
                     </div>
                   </div>
 
@@ -1019,24 +1024,24 @@ const pswInit = (selector) => {
                    id="driver2HasPreviousLicenseItems">
                 <div class="psw-form-item psw-form-item--colums">
 
-                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--series">
+                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--Serie">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver2PreviousSeries"
-                      id="driver2PreviousSeries"
+                      name="driver2PreviousLicenseSerie"
+                      id="driver2PreviousLicenseSerie"
                       placeholder=" ">
-                    <label for="driver2PreviousSeries">Серия:</label>
+                    <label for="driver2PreviousLicenseSerie">Серия:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver2PreviousNumber"
-                      id="driver2PreviousNumber"
+                      name="driver2PreviousLicenseNumber"
+                      id="driver2PreviousLicenseNumber"
                       placeholder=" ">
-                    <label for="driver2PreviousNumber">Номер:</label>
+                    <label for="driver2PreviousLicenseNumber">Номер:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -1137,11 +1142,11 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-series"
-                        name="driver3Series"
-                        id="driver3Series"
+                        class="psw-form-input  psw-form-input--driver-Serie"
+                        name="driver3Serie"
+                        id="driver3Serie"
                         placeholder=" ">
-                      <label for="driver3Series">Серия:</label>
+                      <label for="driver3Serie">Серия:</label>
                     </div>
                   </div>
 
@@ -1218,24 +1223,24 @@ const pswInit = (selector) => {
                    id="driver3HasPreviousLicenseItems">
                 <div class="psw-form-item psw-form-item--colums">
 
-                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--series">
+                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--Serie">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver3PreviousSeries"
-                      id="driver3PreviousSeries"
+                      name="driver3PreviousLicenseSerie"
+                      id="driver3PreviousLicenseSerie"
                       placeholder=" ">
-                    <label for="driver3PreviousSeries">Серия:</label>
+                    <label for="driver3PreviousLicenseSerie">Серия:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver3PreviousNumber"
-                      id="driver3PreviousNumber"
+                      name="driver3PreviousLicenseNumber"
+                      id="driver3PreviousLicenseNumber"
                       placeholder=" ">
-                    <label for="driver3PreviousNumber">Номер:</label>
+                    <label for="driver3PreviousLicenseNumber">Номер:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -1336,11 +1341,11 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-series"
-                        name="driver4Series"
-                        id="driver4Series"
+                        class="psw-form-input  psw-form-input--driver-Serie"
+                        name="driver4Serie"
+                        id="driver4Serie"
                         placeholder=" ">
-                      <label for="driver4Series">Серия:</label>
+                      <label for="driver4Serie">Серия:</label>
                     </div>
                   </div>
 
@@ -1417,24 +1422,24 @@ const pswInit = (selector) => {
                    id="driver4HasPreviousLicenseItems">
                 <div class="psw-form-item psw-form-item--colums">
 
-                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--series">
+                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--Serie">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver4PreviousSeries"
-                      id="driver4PreviousSeries"
+                      name="driver4PreviousLicenseSerie"
+                      id="driver4PreviousLicenseSerie"
                       placeholder=" ">
-                    <label for="driver4PreviousSeries">Серия:</label>
+                    <label for="driver4PreviousLicenseSerie">Серия:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver4PreviousNumber"
-                      id="driver4PreviousNumber"
+                      name="driver4PreviousLicenseNumber"
+                      id="driver4PreviousLicenseNumber"
                       placeholder=" ">
-                    <label for="driver4PreviousNumber">Номер:</label>
+                    <label for="driver4PreviousLicenseNumber">Номер:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -1535,11 +1540,11 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-series"
-                        name="driver5Series"
-                        id="driver5Series"
+                        class="psw-form-input  psw-form-input--driver-Serie"
+                        name="driver5Serie"
+                        id="driver5Serie"
                         placeholder=" ">
-                      <label for="driver5Series">Серия:</label>
+                      <label for="driver5Serie">Серия:</label>
                     </div>
                   </div>
 
@@ -1616,24 +1621,24 @@ const pswInit = (selector) => {
                    id="driver5HasPreviousLicenseItems">
                 <div class="psw-form-item psw-form-item--colums">
 
-                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--series">
+                  <div class="psw-form-item__colums-item  psw-form-item__colums-item--Serie">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver5PreviousSeries"
-                      id="driver5PreviousSeries"
+                      name="driver5PreviousLicenseSerie"
+                      id="driver5PreviousLicenseSerie"
                       placeholder=" ">
-                    <label for="driver5PreviousSeries">Серия:</label>
+                    <label for="driver5PreviousLicenseSerie">Серия:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
                     <input
                       type="text"
                       class="psw-form-input"
-                      name="driver5PreviousNumber"
-                      id="driver5PreviousNumber"
+                      name="driver5PreviousLicenseNumber"
+                      id="driver5PreviousLicenseNumber"
                       placeholder=" ">
-                    <label for="driver5PreviousNumber">Номер:</label>
+                    <label for="driver5PreviousLicenseNumber">Номер:</label>
                   </div>
 
                   <div class="psw-form-item__colums-item  psw-form-item__colums-item--col-3">
@@ -1710,7 +1715,7 @@ const pswInit = (selector) => {
 
   widget.innerHTML = html;
   preloaderOn();
-  prepare();
+  prepare(widget.dataset.token);
   start();
   preloaderOff();
 };

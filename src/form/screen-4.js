@@ -261,7 +261,7 @@ export const getFourthScreenForm = () => {
     for (const screen of driverScreens) {
       const lastName = screen.querySelector('.psw-form-input--driver-last-name');
       const firstName = screen.querySelector('.psw-form-input--driver-first-name');
-      const series = screen.querySelector('.psw-form-input--driver-series');
+      const series = screen.querySelector('.psw-form-input--driver-serie');
       const number = screen.querySelector('.psw-form-input--driver-number');
 
       screen.closest('.psw-form-screen-driver').classList.remove('required');
