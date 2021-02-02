@@ -265,7 +265,6 @@ const setPassportIssuer = (code, element) => {
 }
 
 export const fillBySuggest = () => {
-  preloaderOn();
   event.preventDefault();
   let requestValue = $('#ps__widget_entrance_value').val();
   let field = requestValue.length > 10 ? 'vin' : 'reg_num';
@@ -288,10 +287,8 @@ export const fillBySuggest = () => {
         } else {
           // alertify.notify('На данный транспорт ничего не нашлось', 'error')
         }
-        preloaderOff();
       },
       fail: (error) => {
-        preloaderOff()
         console.log(error);
         // alertify.notify('Произошла техническая ошибка', 'error')
       }

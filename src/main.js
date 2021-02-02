@@ -99,6 +99,7 @@ const pswInit = (selector) => {
             </div>
 
             <div class="psw-form-item">
+            <input type="hidden" name="identifierType" value="vin">
               <input
                 type="text"
                 class="psw-form-input"

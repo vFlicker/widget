@@ -731,3 +731,11 @@ input.psw-form-input-error:focus {
     margin-bottom: 20px;
   }
 }
+
+.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
