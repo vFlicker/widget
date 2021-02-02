@@ -266,6 +266,7 @@ const setPassportIssuer = (code, element) => {
 
 export const fillBySuggest = () => {
   event.preventDefault();
+  preloaderOn();
   let requestValue = $('#ps__widget_entrance_value').val();
   let field = requestValue.length > 10 ? 'vin' : 'reg_num';
   let stop = false;
@@ -285,19 +286,21 @@ export const fillBySuggest = () => {
           fillWithData(data);
           $('.psw-main-screen__psw-btn-link').click();
         } else {
-          // alertify.notify('На данный транспорт ничего не нашлось', 'error')
+          ps__show_alert('На данный транспорт ничего не нашлось')
         }
+        preloaderOff();
       },
       fail: (error) => {
         console.log(error);
-        // alertify.notify('Произошла техническая ошибка', 'error')
+        preloaderOff();
+        ps__show_alert('Произошла техническая ошибка')
       }
     });
   } else {
     if (field === 'vin' && stop) {
-      // alertify.notify('Автозаполнение можно использовать только с Регистрационным номером или ВИН автомобиля', 'error');
+      ps__show_alert('Автозаполнение можно использовать только с Регистрационным номером или ВИН автомобиля');
     } else {
-      // alertify.notify('Значение не может быть пустым', 'error');
+      ps__show_alert('Значение не может быть пустым');
     }
     preloaderOff();
   }

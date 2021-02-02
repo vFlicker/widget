@@ -8,17 +8,12 @@ import {getFourthScreenForm} from './form/screen-4';
 import {ps__hide_alert, pswStorage, preloaderOn, preloaderOff} from "./utils";
 
 const prepare = (token) => {
-  window.pswUrl = "http://is.test/widget/osago";
+  window.pswUrl = "https://polis.sale/widget/osago";
   window.pswToken = token;
-  $(() => {
-    $.ajaxSetup({
-      headers: {
-        Enc: window.pswToken
-      }
-    });
-
-    $.ajaxStart(() => preloaderOn);
-    $.ajaxStop(() => preloaderOff);
+  $.ajaxSetup({
+    headers: {
+      Enc: window.pswToken
+    }
   });
 }
 
@@ -36,6 +31,8 @@ const pswInit = (selector) => {
     getSecondScreenForm();
     getThirdScreenForm();
     getFourthScreenForm();
+
+    document.querySelector('.ps__widget_alert_close_btn').addEventListener('click', ps__hide_alert)
   };
 
   const html = `<div class="psw-wrapper">
@@ -58,6 +55,7 @@ const pswInit = (selector) => {
       </div>
     </div>
     <form class="psw-form" id="ps__widget_osago_form">
+    <input type="hidden" name="vehicleUseForType" value="640254020">
       <div class="psw-form-screen">
 
         <div class="psw-form-header">
@@ -225,10 +223,10 @@ const pswInit = (selector) => {
                 class="psw-form-select"
                 name="vehicleEngineType"
                 id="vehicleEngineType">
-                <option value="Petrol" selected>Бензин</option>
-                <option value="Diesel">Дизель</option>
-                <option value="Electro">Электро</option>
-                <option value="Hybrid">Гибрид</option>
+                <option value="P" selected>Бензин</option>
+                <option value="D">Дизель</option>
+                <option value="E">Электро</option>
+                <option value="H">Гибрид</option>
               </select>
               <label class="psw-label--select" for="vehicleEngineType">Тип двигателя:</label>
             </div>
@@ -1708,7 +1706,7 @@ const pswInit = (selector) => {
       </div>
     </div>
     <div class="ps__widget_alert_block">
-      <button class="ps__widget_alert_close_btn" onclick="ps__hide_alert()">+</button>
+      <button class="ps__widget_alert_close_btn">+</button>
       <div class="ps__widget_alert_title">Предупреждение</div>
     <div class="ps__widget_alert_content"></div>
   </div>
