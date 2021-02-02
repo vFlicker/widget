@@ -1,4 +1,4 @@
-import { checkCmpletenessFields, getScreen, setAddressDetails, ps__hide_alert, ps__show_alert } from "../utils";
+import {checkCmpletenessFields, getScreen, setAddressDetails, ps__hide_alert, ps__show_alert} from "../utils";
 import * as $ from 'jquery';
 import 'suggestions-jquery/dist/js/jquery.suggestions.min';
 
@@ -15,19 +15,19 @@ export const getSecondScreenForm = () => {
   const formSecondScreenButtonNext = formSecondScreen.querySelector(`.psw-btn-next-step`);
   const formFourthScreenButtonPrev = formFourthScreen.querySelector(`.psw-btn-prev-step`);
 
-  $('#insurerAddressName + label')
-    .css('top', '-17px')
-    .css('font-size', '12px');
+  $(`#insurerAddressName + label`)
+    .css(`top`, `-17px`)
+    .css(`font-size`, `12px`);
 
-  $("#insurerAddressName").suggestions({
-    token: "3997eb72967889aaf9aefd5b65060dc1ab866224",
-    type: "ADDRESS",
-    onSelect: function(suggestion) {
-      console.log(suggestion)
+  $(`#insurerAddressName`).suggestions({
+    token: `3997eb72967889aaf9aefd5b65060dc1ab866224`,
+    type: `ADDRESS`,
+    onSelect(suggestion) {
+      console.log(suggestion);
       if (!suggestion.data.house) {
 
       } else {
-        setAddressDetails('insurer', suggestion.data);
+        setAddressDetails(`insurer`, suggestion.data);
       }
     }
   });

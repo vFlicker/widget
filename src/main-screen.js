@@ -27,8 +27,8 @@ export const getMainScreen = () => {
     let date = new Date();
     date = date.setDate(date.getDate() + 4);
     date = new Date(date);
-    document.querySelector('#osagoStartDate').value = (date.getDate() > 9 ? '' : '0') + date.getDate() + '.' + ((date.getMonth() + 1) > 9 ? '' : '0') + (date.getMonth() + 1) + '.' + date.getFullYear();
-  }
+    document.querySelector(`#osagoStartDate`).value = (date.getDate() > 9 ? `` : `0`) + date.getDate() + `.` + ((date.getMonth() + 1) > 9 ? `` : `0`) + (date.getMonth() + 1) + `.` + date.getFullYear();
+  };
 
   searchButton.addEventListener(`click`, onSearchButtonClick);
   buttonLink.addEventListener(`click`, onButtonLinkClick);

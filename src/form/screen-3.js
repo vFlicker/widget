@@ -1,4 +1,4 @@
-import { checkCmpletenessFields, getScreen, setAddressDetails, ps__hide_alert, ps__show_alert } from "../utils";
+import {checkCmpletenessFields, getScreen, setAddressDetails, ps__hide_alert, ps__show_alert} from "../utils";
 import * as $ from "jquery";
 import 'suggestions-jquery/dist/js/jquery.suggestions.min';
 
@@ -12,19 +12,19 @@ export const getThirdScreenForm = () => {
   const formThirdScreenButtonPrev = formThirdScreen.querySelector(`.psw-btn-prev-step`);
   const formThirdScreenButtonNext = formThirdScreen.querySelector(`.psw-btn-next-step`);
 
-  $('#clientAddressName + label')
-    .css('top', '-17px')
-    .css('font-size', '12px');
+  $(`#clientAddressName + label`)
+    .css(`top`, `-17px`)
+    .css(`font-size`, `12px`);
 
-  $("#clientAddressName").suggestions({
-    token: "3997eb72967889aaf9aefd5b65060dc1ab866224",
-    type: "ADDRESS",
-    onSelect: function(suggestion) {
+  $(`#clientAddressName`).suggestions({
+    token: `3997eb72967889aaf9aefd5b65060dc1ab866224`,
+    type: `ADDRESS`,
+    onSelect(suggestion) {
       console.log(suggestion);
       if (!suggestion.data.house) {
 
       } else {
-        setAddressDetails('client', suggestion.data);
+        setAddressDetails(`client`, suggestion.data);
       }
     }
   });

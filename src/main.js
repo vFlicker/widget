@@ -8,22 +8,22 @@ import {getFourthScreenForm} from './form/screen-4';
 import {ps__hide_alert, pswStorage, preloaderOn, preloaderOff} from "./utils";
 
 const prepare = (token) => {
-  window.pswUrl = "https://polis.sale/widget/osago";
+  window.pswUrl = `https://polis.sale/widget/osago`;
   window.pswToken = token;
   $.ajaxSetup({
     headers: {
       Enc: window.pswToken
     }
   });
-}
+};
 
 const pswInit = (selector) => {
   const widget = document.querySelector(selector);
 
   const start = () => {
-    pswStorage.remove('client');
-    pswStorage.remove('insurer');
-    pswStorage.remove('calculation');
+    pswStorage.remove(`client`);
+    pswStorage.remove(`insurer`);
+    pswStorage.remove(`calculation`);
     pswLSbuilder();
     index();
     getMainScreen();
@@ -32,7 +32,7 @@ const pswInit = (selector) => {
     getThirdScreenForm();
     getFourthScreenForm();
 
-    document.querySelector('.ps__widget_alert_close_btn').addEventListener('click', ps__hide_alert)
+    document.querySelector(`.ps__widget_alert_close_btn`).addEventListener(`click`, ps__hide_alert);
   };
 
   const html = `<div class="psw-wrapper">
