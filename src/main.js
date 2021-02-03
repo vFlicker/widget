@@ -1693,6 +1693,7 @@ const pswInit = (selector) => {
     <div class="psw-response">
       <ul class="psw-response__list">
       </ul>
+      <button class="psw-btn psw-response__btn-back">Назад</button>
     </div>
     <div class="ps__widget_loading" id="ps__widget_loading">
       <div class="ps__widget_loading-text">

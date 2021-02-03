@@ -32,6 +32,14 @@ export const getFourthScreenForm = () => {
    ----------------------------- */
 
   const responseWrapper = document.querySelector(`.psw-response`);
+  const btnBack = responseWrapper.querySelector(`.psw-response__btn-back`);
+
+  const onButtonBackClick = (evt) => {
+    evt.preventDefault();
+    form.classList.add(`psw-form--active`);
+    responseWrapper.classList.remove(`psw-response--active`);
+    getScreen(4);
+  };
 
   const outputCalculateResponseHtml = () => {
     let data = pswStorage.get(`calculation`, true);
@@ -116,6 +124,8 @@ export const getFourthScreenForm = () => {
     responseWrapper.classList.add(`psw-response--active`);
     getCalculateResponse();
   };
+
+  btnBack.addEventListener(`click`, onButtonBackClick);
 
   /* -----------------------------
               !Расчёт
