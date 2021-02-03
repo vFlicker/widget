@@ -769,7 +769,7 @@ input.psw-form-input-error:focus {
 
 .psw-response__list {
   margin: 0;
-  padding: 0;
+  padding: 0 3px;
   list-style: none;
   max-height: 500px;
   overflow-y: scroll;
@@ -1006,12 +1006,112 @@ input.psw-form-input-error:focus {
           transform: rotate(45deg);
 }
 
-.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front {
+/*.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front {
   display: none !important;
   height: 0 !important;
   width: 0 !important;
   opacity: 0 !important;
   visibility: hidden !important;
+}*/
+
+.psw_payment__block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.psw_payment__header {
+  border-bottom: 2px solid green;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bolder;
+  position: relative;
+}
+
+.psw_payment__content {
+  padding: 15px;
+}
+
+.psw_cols__2 {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.psw_cols__2 div:first-child img {
+  max-width: 200px;
+}
+
+.psw_cols__2 div:last-child {
+  margin-left: 30px;
+  line-height: 1.8;
+}
+
+.psw_payment__controllers {
+  display: block;
+  margin-top: 35px;
+}
+
+.psw_payment__btn_block {
+  width: 100%;
+}
+
+.psw_payment__btn_block a {
+  display: block;
+  margin: 0 auto;
+  border-radius: 3px;
+  padding: 10px 16px;
+  background-color: #27b127;
+  width: fit-content;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.psw_payment__btn_block a:hover {
+  background-color: #58d558;
+}
+
+.psw_payment__btn_block a:active {
+  background-color: #2ba02b;
+}
+
+.psw_payment__link_block {
+  margin: 20px auto;
+  text-align: center;
+}
+
+#psw_payment__close {
+  display: block;
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  right: 18px;
+  top: 18px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3C!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 378.303 378.303' style='enable-background:new 0 0 378.303 378.303;' xml:space='preserve'%3E%3Cpolygon style='fill:%23FF3501;' points='378.303,28.285 350.018,0 189.151,160.867 28.285,0 0,28.285 160.867,189.151 0,350.018 28.285,378.302 189.151,217.436 350.018,378.302 378.303,350.018 217.436,189.151 '/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E%0A");
+}
+
+.psw_hidden__input {
+  display: none;
+}
+
+.psw-response__list::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+.psw-response__list::-webkit-scrollbar-track {
+}
+
+.psw-response__list::-webkit-scrollbar-thumb {
+  background-color: #cbcbcb;    /* color of the scroll thumb */
+  border-radius: 6px;       /* roundness of the scroll thumb */
 }
 
 @media screen and (min-width: 600px) {
@@ -1110,5 +1210,13 @@ input.psw-form-input-error:focus {
   .psw-response-item__name,
   .psw-response-item__price {
     margin-bottom: 10px;
+  }
+
+  .psw_cols__2 {
+    display: block;
+  }
+
+  .psw_cols__2 div:last-child {
+    margin-left: 0;
   }
 }

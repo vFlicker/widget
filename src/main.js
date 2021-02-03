@@ -56,6 +56,7 @@ const pswInit = (selector) => {
     </div>
     <form class="psw-form" id="ps__widget_osago_form">
     <input type="hidden" name="vehicleUseForType" value="640254020">
+    <input type="checkbox" name="isClientDriver" id="isClientDriver" value="" class="visually-hidden">
       <div class="psw-form-screen">
 
         <div class="psw-form-header">
@@ -942,7 +943,7 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-Serie"
+                        class="psw-form-input  psw-form-input--driver-serie"
                         name="driver2Serie"
                         id="driver2Serie"
                         placeholder=" ">
@@ -1141,7 +1142,7 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-Serie"
+                        class="psw-form-input  psw-form-input--driver-serie"
                         name="driver3Serie"
                         id="driver3Serie"
                         placeholder=" ">
@@ -1340,7 +1341,7 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-Serie"
+                        class="psw-form-input  psw-form-input--driver-serie"
                         name="driver4Serie"
                         id="driver4Serie"
                         placeholder=" ">
@@ -1539,7 +1540,7 @@ const pswInit = (selector) => {
                     <div class="psw-form-item">
                       <input
                         type="text"
-                        class="psw-form-input  psw-form-input--driver-Serie"
+                        class="psw-form-input  psw-form-input--driver-serie"
                         name="driver5Serie"
                         id="driver5Serie"
                         placeholder=" ">
@@ -1708,15 +1709,14 @@ const pswInit = (selector) => {
     <div class="ps__widget_alert_block">
       <button class="ps__widget_alert_close_btn">+</button>
       <div class="ps__widget_alert_title">Предупреждение</div>
-    <div class="ps__widget_alert_content"></div>
-  </div>
+      <div class="ps__widget_alert_content"></div>
+    </div>
 </div>`;
 
   widget.innerHTML = html;
-  preloaderOn();
+
   prepare(widget.dataset.token);
   start();
-  preloaderOff();
 };
 
 pswInit(`#widget`);

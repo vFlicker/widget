@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "jquery": "^3.5.1",
+    "jquery-mask-plugin": "^1.14.16",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "suggestions-jquery": "^20.3.0"
   }

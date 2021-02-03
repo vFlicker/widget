@@ -1,20 +1,8 @@
 import * as $ from 'jquery';
+import 'jquery-mask-plugin/dist/jquery.mask.min';
 
 export const dateInputMask = (selector) => {
-  const items = document.querySelectorAll(selector);
-
-  for (const item of items) {
-    item.addEventListener(`keypress`, function (evt) {
-      const length = item.value.length;
-
-      if (evt.keyCode < 47 || evt.keyCode > 57 || length > 9) {
-        evt.preventDefault();
-      }
-      if (length === 2 || length === 5) {
-        item.value += `.`;
-      }
-    });
-  }
+  $(selector).mask('00.00.0000');
 };
 
 export const organisationCodeMask = (selector) => {
@@ -139,7 +127,9 @@ export const formToJson = () => {
     indexed_array[`insurer` + prop] = insurerAddress[prop];
   }
 
-  if (ownerAddress.length) {
+  let ownerIdInsurer = $('#isInsurerClient').is(':checked');
+
+  if (!ownerIdInsurer && ownerAddress.length) {
     for (let prop in ownerAddress) {
       indexed_array[`client` + prop] = ownerAddress[prop];
     }

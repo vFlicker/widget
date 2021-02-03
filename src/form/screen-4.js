@@ -48,11 +48,10 @@ export const getFourthScreenForm = () => {
               </div>
               <span class="psw-response-item__name">${item.partner.name}</span>
               <span class="psw-response-item__price">${item.offerAmount} руб.</span>
-              <button class="psw-response__btn psw-btn">Оформить</button>
+              <button class="psw-response__btn psw-btn psw_success_offer__btn" data-bank="${item.partner.bank_id}">Оформить</button>
             </li>`
           );
-        })
-        .join(``);
+        }).join(``);
 
       responseList.insertAdjacentHTML(`beforeend`, html);
     }
@@ -102,6 +101,7 @@ export const getFourthScreenForm = () => {
         } else {
           pswStorage.set(`calculation`, response, true);
           outputCalculateResponseHtml();
+          bindPayment();
         }
         preloaderOff();
       },
@@ -119,6 +119,119 @@ export const getFourthScreenForm = () => {
 
   /* -----------------------------
               !Расчёт
+   ----------------------------- */
+
+  /* -----------------------------
+              Оформление
+   ----------------------------- */
+
+  const bindPayment = () => {
+    $('.psw_success_offer__btn').on('click touchstart', (e) => {
+      paymentLink(e.target.dataset.bank);
+    });
+  }
+
+  const paymentLink = (bank) => {
+    preloaderOn();
+    let calculation = pswStorage.get('calculation', true);
+
+    if (!bank) {
+      ps__show_alert('Не удается оформить у выбранной СК');
+      preloaderOff();
+      return false;
+    }
+
+    let offer = null;
+
+    calculation.offers.success.map(item => {
+      console.log(item);
+      if (item.partner.bank_id === parseInt(bank)) {
+        offer = item;
+      }
+    });
+
+    console.log(offer);
+
+    if (!offer) {
+      ps__show_alert('Предложение не найдено или потеряло актуальность');
+      preloaderOff();
+      return false;
+    }
+
+    let params = {
+      calculationId: calculation.calculation_id,
+      reqId: calculation.clientRequestId,
+      amount: offer.offerAmount,
+      offerId: offer.id,
+      bankId: offer.partner.bank_id
+    };
+
+    if (offer.status === 200) {
+      params['service_id'] = offer.partner.id;
+      params['confirm_url'] = offer.partner.confirmUrl;
+      params['isApi'] = true;
+    }
+
+    $.ajax({
+      url: window.pswUrl + '/confirm',
+      type: 'POST',
+      headers: {
+        Enc: window.pswToken
+      },
+      data: params,
+      success: (response) => {
+        if (response.status === 'error' && response.message) {
+          ps__show_alert(response.message);
+        } else {
+          displayPaymentBlock(response.offers);
+        }
+        preloaderOff();
+      },
+      fail: (error) => {
+        console.log(error);
+        ps__show_alert(`Технические неполадки, обратитесь к андминистрации сайта, для решения проблемы. Код ошибки ${offer.id}/${offer.partner.id}/${offer.partner.bank_id}`)
+        preloaderOff();
+      }
+    })
+  }
+
+  const displayPaymentBlock = (offer) => {
+    $('.psw-wrapper').append(`<div class="psw_payment__block">
+      <div class="psw_payment__header">
+        Данные заявки
+        <span id="psw_payment__close"></span>
+      </div>
+      <div class="psw_payment__content">
+          <div class="psw_cols__2">
+            <div class="">
+                <img src="${offer.partner.logoUrl}">
+            </div>
+            <div class="">
+              Заявка №: <strong>${offer.id}</strong><br>
+              Стоимость: <strong>${offer.offerAmount.toLocaleString('ru-RU').replace(',', '.')}</strong> руб.<br>
+            </div>
+          </div>
+          <div class="psw_payment__controllers">
+              <div class="psw_payment__btn_block">
+                  <a href="${offer.paymentUrl}" target="_blank" class="">Перейти к оплате</a>
+              </div>
+              <div class="psw_payment__link_block">
+                  ${offer.paymentUrl}
+              </div>
+          </div>
+        </div>
+    </div>`);
+
+    $('#psw_payment__close').on('click touchstart', closePaymentBlock);
+  }
+
+  const closePaymentBlock = () => {
+    $('.psw_payment__block').remove();
+  }
+
+
+  /* -----------------------------
+              !Оформление
    ----------------------------- */
 
   for (const inputWrapper of inputWrappers) {
@@ -205,6 +318,7 @@ export const getFourthScreenForm = () => {
     const gender = driver.querySelector(`.psw-form-select--driver-gender`);
     const birthDate = driver.querySelector(`.psw-form-input--driver-birth-date`);
     const foreigner = driver.querySelector(`.psw-form-checkbox--driver-foreigner`);
+    const isInsurerDriver = document.getElementById('isClientDriver');
 
     lastName.value = insurerLastName.value;
     firstName.value = insurerFirstName.value;
@@ -216,6 +330,9 @@ export const getFourthScreenForm = () => {
     if (isInsurerForeigner.checked) {
       foreigner.checked = true;
     }
+
+    isInsurerDriver.checked = true;
+    isInsurerDriver.value = "on";
 
     for (const button of buttonsCopy) {
       button.remove();
