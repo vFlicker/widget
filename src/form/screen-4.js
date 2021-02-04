@@ -42,6 +42,7 @@ export const getFourthScreenForm = () => {
   };
 
   const outputCalculateResponseHtml = () => {
+    $('.psw-response__item').remove();
     let data = pswStorage.get(`calculation`, true);
     const responseList = responseWrapper.querySelector(`.psw-response__list`);
 
